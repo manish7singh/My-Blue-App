@@ -1,0 +1,17 @@
+nav {
+  color: #fff;
+  background-color: white;
+  width: 100%;
+  height: 56px;
+  line-height: 56px;
+}
+
+.nav-bottom {
+  border-bottom: 5px solid #176DBA;
+  box-shadow: none;
+}
+
+.site-logo {
+  vertical-align: middle;
+  height: 30px;
+}

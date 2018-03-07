@@ -1,0 +1,23 @@
+.form-invalid {
+  color: red;
+}
+
+.btn-color {
+  background-color: #1d75bc;
+}
+
+.btn-width {
+  width: 100%;
+}
+
+.text-color {
+  color: #1d75bc;
+}
+
+.black-class {
+  color: #000000;
+}
+
+.button-padding {
+  padding: 0 1px !important;
+}

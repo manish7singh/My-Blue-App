@@ -1,0 +1,102 @@
+<br>
+<div class="container">
+  <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <h4 class="text-color">Create Account</h4>
+      <p>We'll send a text verification. Message and data rates may apply.</p>
+    </div>
+    <div class="row" *ngIf="view !== 'mobile'">
+      <div class="input-field col s12">
+        <label for="mobileNumber"><b>Mobile Number* (This will be your username)</b></label>
+        <input type="text" formControlName="mobileNumber" id="mobileNumber" class="validate"
+               onkeypress="return event.charCode >= 48 && event.charCode <= 57">
+        <div class="form-invalid" *ngIf="accountForm.get('mobileNumber').touched && accountForm.get('mobileNumber').hasError('required')">
+          Mobile Number is required
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="view !== 'email'">
+      <div class="input-field col s12">
+        <label for="emailAddress"><b>Email Address</b></label>
+        <input type="text" formControlName="emailAddress" id="emailAddress" class="validate">
+        <!--<div class="form-invalid" *ngIf="accountForm.get('emailAddress').touched && accountForm.get('emailAddress').hasError('required')">
+          Email Address is required
+        </div>-->
+        <div class="form-invalid" *ngIf="accountForm.get('emailAddress').touched && accountForm.get('emailAddress').hasError('email')">
+          Email Address is invalid
+        </div>
+      </div>
+    </div>
+    <div class="center-align">
+      <a class="text-color" (click)="toggleView()"><h5> <b>Use {{view}} instead</b> </h5></a>
+    </div>
+    <div class="row">
+      <div class="input-field col s9">
+        <label for="password"><b>Password</b></label>
+        <input type="{{inputType}}" formControlName="password" id="password" class="validate" (input)="validatePassword()">
+      </div>
+      <div class="input-field col s3">
+        <button type="button" class="btn btn-color button-padding" (click)="togglePasswordView()">{{action}}</button>
+      </div>
+    </div>
+    <div class="row" style="background-color: #e9ecef">
+      <div class="col s12">
+        <h5><b>Password Requirements</b></h5>
+        <div *ngIf="accountForm.get('password').touched && accountForm.get('password').hasError('required')">
+          Password is required
+        </div>
+        <div class="valign-wrapper">
+          <i class="material-icons icon-green" *ngIf="accountForm.get('password').touched && accountForm.get('password').value.length >= 8">
+            check
+          </i>
+          <i class="material-icons icon-red" *ngIf="accountForm.get('password').touched && accountForm.get('password').value.length < 8">
+            close
+          </i>
+          At least 8 characters
+        </div>
+        <div class="valign-wrapper">
+          <i class="material-icons icon-green" *ngIf="accountForm.get('password').touched && numberFlag">
+            check
+          </i>
+          <i class="material-icons icon-red" *ngIf="accountForm.get('password').touched && !numberFlag">
+            close
+          </i>
+          Must include a number
+        </div>
+        <div class="valign-wrapper">
+          <i class="material-icons icon-green" *ngIf="accountForm.get('password').touched && uppercaseFlag">
+            check
+          </i>
+          <i class="material-icons icon-red" *ngIf="accountForm.get('password').touched && !uppercaseFlag">
+            close
+          </i>
+          Must include an uppercase letter
+        </div>
+        <div class="valign-wrapper">
+          <i class="material-icons icon-green" *ngIf="accountForm.get('password').touched && specialCharFlag">
+            check
+          </i>
+          <i class="material-icons icon-red" *ngIf="accountForm.get('password').touched && !specialCharFlag">
+            close
+          </i>
+          Must include a special character: {{specialPassword}}
+        </div>
+        <br>
+      </div>
+    </div>
+    <div class="row">
+      <p>
+        <input type="checkbox" id="accept" formControlName="accept" class="filled-in">
+        <label for="accept" class="black-class"><b>Yes, I wish to receive information from Blue Cross Blue Shield of Massachusetts</b></label>
+      </p>
+      <p>By clicking "Continue" I agree to the Blue Cross Blue shield of Massachusetts Terms of Use and Confidentiality.</p>
+    </div>
+    <div class="center-align">
+      <button type="submit" class="btn btn-color btn-width" [disabled]="!accountForm.valid" >Continue</button>
+    </div>
+    <br>
+    <h6>* Field is required </h6>
+    <br>
+  </form>
+</div>
+<blue-footer></blue-footer>
